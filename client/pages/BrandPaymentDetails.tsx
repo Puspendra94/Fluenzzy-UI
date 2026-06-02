@@ -9,7 +9,6 @@ import {
   MessageCircle,
   Download,
   FileText,
-  AlertCircle,
   X,
 } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -37,7 +36,6 @@ interface FlowStage {
   description: string;
   status: "completed" | "current" | "pending";
   date?: string;
-  action?: string;
 }
 
 const mockPaymentDetail: PaymentDetail = {
@@ -58,43 +56,38 @@ const mockPaymentDetail: PaymentDetail = {
 const mockFlowStages: FlowStage[] = [
   {
     id: "1",
-    title: "Payment Link Generated",
-    description: "Payment link was created and sent to the influencer",
+    title: "Payment Created",
+    description: "You initiated a payment for this collaboration",
     status: "completed",
     date: "2024-01-10",
-    action: "Link generated",
   },
   {
     id: "2",
-    title: "Payment Link Status",
-    description: "Payment link is active and ready for use",
+    title: "Link Sent",
+    description: "Payment link sent to the recipient",
     status: "completed",
     date: "2024-01-10",
-    action: "Link active",
   },
   {
     id: "3",
-    title: "Payment Initiated",
-    description: "Influencer initiated the payment",
+    title: "Payment Received",
+    description: "Recipient confirmed receipt of payment",
     status: "completed",
     date: "2024-01-14",
-    action: "Payment started",
   },
   {
     id: "4",
-    title: "Proof Shared",
-    description: "Proof of delivery/completion uploaded",
+    title: "Proof Verified",
+    description: "Proof of service delivery uploaded and verified",
     status: "completed",
     date: "2024-01-14",
-    action: "Screenshot uploaded",
   },
   {
     id: "5",
-    title: "Influencer Confirmed",
-    description: "Influencer confirmed payment receipt",
+    title: "Completed",
+    description: "Payment transaction completed successfully",
     status: "completed",
     date: "2024-01-15",
-    action: "Confirmed",
   },
 ];
 
@@ -154,12 +147,12 @@ export default function BrandPaymentDetails() {
 
   const getStageIcon = (status: FlowStage["status"]) => {
     if (status === "completed") {
-      return <CheckCircle2 className="w-6 h-6 text-green-600" />;
+      return <CheckCircle2 className="w-5 h-5 text-green-600" />;
     } else if (status === "current") {
-      return <Clock className="w-6 h-6 text-blue-600" />;
+      return <Clock className="w-5 h-5 text-blue-600" />;
     } else {
       return (
-        <div className="w-6 h-6 rounded-full border-2 border-gray-300" />
+        <div className="w-5 h-5 rounded-full border-2 border-gray-300" />
       );
     }
   };
@@ -200,211 +193,221 @@ export default function BrandPaymentDetails() {
               </Button>
             </div>
 
-            {/* Payment Status and Amount */}
-            <Card className="mb-8 bg-gradient-to-br from-primary/5 to-secondary/5">
-              <CardContent className="pt-6">
-                <div className="flex items-end justify-between">
-                  <div>
-                    <p className="text-foreground/60 text-sm mb-2">Amount</p>
-                    <p className="text-4xl font-bold text-foreground mb-4">
-                      ${mockPaymentDetail.amount.toLocaleString()}
-                    </p>
-                    <div className="flex items-center gap-2">
-                      <span className="px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800 capitalize">
-                        {mockPaymentDetail.status}
-                      </span>
-                      <span className="text-sm text-foreground/60">
-                        via {mockPaymentDetail.method}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-foreground/60 text-sm mb-1">Transaction ID</p>
-                    <p className="font-mono text-lg font-semibold text-foreground">
-                      {mockPaymentDetail.transactionId}
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Payment Flow Tracker */}
+            {/* Payment Journey - Horizontal Timeline */}
             <Card className="mb-8">
               <CardContent className="pt-6">
                 <h2 className="text-xl font-bold text-foreground mb-6">
                   Payment Journey
                 </h2>
-                <div className="space-y-4">
-                  {mockFlowStages.map((stage, idx) => (
-                    <div key={stage.id}>
-                      <div className="flex gap-4">
-                        {/* Timeline Line and Icon */}
-                        <div className="flex flex-col items-center">
+                <div className="overflow-x-auto">
+                  <div className="flex gap-6 min-w-max pb-4">
+                    {mockFlowStages.map((stage, idx) => (
+                      <div key={stage.id} className="flex flex-col items-center min-w-[180px]">
+                        {/* Icon */}
+                        <div className="flex items-center justify-center w-10 h-10 rounded-full bg-muted mb-3">
                           {getStageIcon(stage.status)}
-                          {idx < mockFlowStages.length - 1 && (
-                            <div className="w-0.5 h-16 bg-gray-300 mt-2" />
-                          )}
                         </div>
 
+                        {/* Connector Line */}
+                        {idx < mockFlowStages.length - 1 && (
+                          <div className="absolute left-[calc(50%+20px)] top-[52px] w-[120px] h-0.5 bg-gray-300" />
+                        )}
+
                         {/* Content */}
-                        <div className="pb-4 flex-grow">
-                          <div className="flex items-start justify-between mb-1">
-                            <h3 className="font-semibold text-foreground">
-                              {stage.title}
-                            </h3>
-                            {stage.date && (
-                              <span className="text-sm text-foreground/60">
-                                {new Date(stage.date).toLocaleDateString()}
-                              </span>
-                            )}
-                          </div>
-                          <p className="text-sm text-foreground/70 mb-2">
+                        <div className="text-center">
+                          <h3 className="font-semibold text-foreground text-sm mb-1">
+                            {stage.title}
+                          </h3>
+                          <p className="text-xs text-foreground/60 mb-2 max-w-[160px]">
                             {stage.description}
                           </p>
-                          {stage.action && (
-                            <span className="inline-block px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">
-                              {stage.action}
+                          {stage.date && (
+                            <span className="text-xs text-foreground/50">
+                              {new Date(stage.date).toLocaleDateString()}
                             </span>
                           )}
                         </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Proof of Delivery Section */}
-            <Card className="mb-8">
-              <CardContent className="pt-6">
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-xl font-bold text-foreground">
-                    Proof of Delivery
-                  </h2>
-                  <Button
-                    size="sm"
-                    onClick={() => setShowUploadModal(true)}
-                  >
-                    <Upload className="w-4 h-4 mr-2" />
-                    Upload Proof
-                  </Button>
-                </div>
-
-                {uploadedFiles.length > 0 ? (
-                  <div className="space-y-3">
-                    {uploadedFiles.map((file) => (
-                      <div
-                        key={file.id}
-                        className="flex items-center justify-between p-4 border border-border rounded-lg hover:bg-muted/30 transition-colors"
-                      >
-                        <div className="flex items-center gap-3 flex-grow">
-                          <div className="p-2 bg-blue-100 rounded-lg">
-                            <FileText className="w-5 h-5 text-blue-600" />
-                          </div>
-                          <div className="flex-grow">
-                            <p className="font-medium text-foreground">
-                              {file.name}
-                            </p>
-                            <p className="text-xs text-foreground/60">
-                              Uploaded by {file.uploadedBy} on{" "}
-                              {new Date(file.uploadedAt).toLocaleDateString()}
-                            </p>
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <p className="text-sm font-medium text-foreground/60">
-                            {file.size}
-                          </p>
-                          <button className="text-primary hover:text-primary/80 transition-colors mt-1">
-                            <Download className="w-4 h-4" />
-                          </button>
-                        </div>
-                      </div>
                     ))}
                   </div>
-                ) : (
-                  <div className="text-center py-8 border-2 border-dashed border-border rounded-lg">
-                    <FileText className="w-8 h-8 text-foreground/40 mx-auto mb-2" />
-                    <p className="text-foreground/60 text-sm">
-                      No proof documents uploaded yet
-                    </p>
-                  </div>
-                )}
+                </div>
               </CardContent>
             </Card>
 
-            {/* Payment Details */}
-            <div className="grid md:grid-cols-2 gap-6 mb-8">
-              {/* Recipient Details */}
-              <Card>
+            {/* Details and Proof Section */}
+            <div className="grid lg:grid-cols-3 gap-6">
+              {/* Main Details Card */}
+              <Card className="lg:col-span-2">
                 <CardContent className="pt-6">
-                  <h3 className="font-bold text-foreground mb-4">
-                    Recipient Details
-                  </h3>
-                  <div className="space-y-3">
-                    <div>
-                      <p className="text-sm text-foreground/60">Name</p>
-                      <p className="font-medium text-foreground">
-                        {mockPaymentDetail.recipientName}
+                  <div className="space-y-6">
+                    {/* Amount Section */}
+                    <div className="pb-6 border-b border-border">
+                      <p className="text-sm text-foreground/60 mb-2">Amount</p>
+                      <p className="text-4xl font-bold text-foreground">
+                        ${mockPaymentDetail.amount.toLocaleString()}
                       </p>
                     </div>
-                    <div>
-                      <p className="text-sm text-foreground/60">Type</p>
-                      <p className="font-medium text-foreground capitalize">
-                        {mockPaymentDetail.recipientType}
-                      </p>
-                    </div>
-                    {mockPaymentDetail.recipientHandle && (
+
+                    {/* Status and Method */}
+                    <div className="grid grid-cols-2 gap-6 pb-6 border-b border-border">
                       <div>
-                        <p className="text-sm text-foreground/60">Handle</p>
+                        <p className="text-sm text-foreground/60 mb-2">Status</p>
+                        <span
+                          className={cn(
+                            "px-3 py-1 rounded-full text-sm font-medium capitalize inline-block",
+                            mockPaymentDetail.status === "completed"
+                              ? "bg-green-100 text-green-800"
+                              : mockPaymentDetail.status === "pending"
+                              ? "bg-yellow-100 text-yellow-800"
+                              : mockPaymentDetail.status === "processing"
+                              ? "bg-blue-100 text-blue-800"
+                              : "bg-red-100 text-red-800"
+                          )}
+                        >
+                          {mockPaymentDetail.status}
+                        </span>
+                      </div>
+                      <div>
+                        <p className="text-sm text-foreground/60 mb-2">Method</p>
                         <p className="font-medium text-foreground">
-                          @{mockPaymentDetail.recipientHandle}
+                          {mockPaymentDetail.method}
                         </p>
                       </div>
-                    )}
+                    </div>
+
+                    {/* IDs */}
+                    <div className="grid grid-cols-2 gap-6 pb-6 border-b border-border">
+                      <div>
+                        <p className="text-sm text-foreground/60 mb-2">Transaction ID</p>
+                        <p className="font-mono text-sm font-semibold text-foreground break-all">
+                          {mockPaymentDetail.transactionId || "—"}
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-foreground/60 mb-2">Payment ID</p>
+                        <p className="font-mono text-sm font-semibold text-foreground">
+                          {mockPaymentDetail.id}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Recipient Details */}
+                    <div className="pb-6 border-b border-border">
+                      <h3 className="font-semibold text-foreground mb-3">
+                        Recipient Details
+                      </h3>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <p className="text-sm text-foreground/60 mb-1">Name</p>
+                          <p className="font-medium text-foreground">
+                            {mockPaymentDetail.recipientName}
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-sm text-foreground/60 mb-1">Type</p>
+                          <p className="font-medium text-foreground capitalize">
+                            {mockPaymentDetail.recipientType}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Payment Information */}
+                    <div className="pb-6 border-b border-border">
+                      <h3 className="font-semibold text-foreground mb-3">
+                        Payment Information
+                      </h3>
+                      <div className="grid grid-cols-2 gap-4 mb-4">
+                        <div>
+                          <p className="text-sm text-foreground/60 mb-1">Campaign</p>
+                          <p className="font-medium text-foreground">
+                            {mockPaymentDetail.campaignName}
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-sm text-foreground/60 mb-1">Payment Date</p>
+                          <p className="font-medium text-foreground">
+                            {new Date(mockPaymentDetail.date).toLocaleDateString()}
+                          </p>
+                        </div>
+                      </div>
+                      {mockPaymentDetail.dueDate && (
+                        <div>
+                          <p className="text-sm text-foreground/60 mb-1">Due Date</p>
+                          <p className="font-medium text-foreground">
+                            {new Date(mockPaymentDetail.dueDate).toLocaleDateString()}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Description */}
+                    <div>
+                      <h3 className="font-semibold text-foreground mb-2">
+                        Description
+                      </h3>
+                      <p className="text-foreground/70">
+                        {mockPaymentDetail.description}
+                      </p>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
 
-              {/* Campaign & Payment Info */}
+              {/* Proof of Delivery Card */}
               <Card>
                 <CardContent className="pt-6">
-                  <h3 className="font-bold text-foreground mb-4">
-                    Payment Information
-                  </h3>
-                  <div className="space-y-3">
-                    <div>
-                      <p className="text-sm text-foreground/60">Campaign</p>
-                      <p className="font-medium text-foreground">
-                        {mockPaymentDetail.campaignName}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-foreground/60">Payment Method</p>
-                      <p className="font-medium text-foreground">
-                        {mockPaymentDetail.method}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-foreground/60">Payment Date</p>
-                      <p className="font-medium text-foreground">
-                        {new Date(mockPaymentDetail.date).toLocaleDateString()}
-                      </p>
-                    </div>
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="font-semibold text-foreground">
+                      Proof of Delivery
+                    </h3>
+                    <Button
+                      size="sm"
+                      onClick={() => setShowUploadModal(true)}
+                    >
+                      <Upload className="w-3 h-3 mr-1" />
+                      Upload
+                    </Button>
                   </div>
+
+                  {uploadedFiles.length > 0 ? (
+                    <div className="space-y-2">
+                      {uploadedFiles.map((file) => (
+                        <div
+                          key={file.id}
+                          className="p-3 border border-border rounded-lg hover:bg-muted/20 transition-colors"
+                        >
+                          <div className="flex items-start gap-2 mb-2">
+                            <FileText className="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" />
+                            <div className="flex-grow min-w-0">
+                              <p className="text-sm font-medium text-foreground truncate">
+                                {file.name}
+                              </p>
+                              <p className="text-xs text-foreground/60">
+                                {file.size}
+                              </p>
+                            </div>
+                            <button className="text-primary hover:text-primary/80 transition-colors flex-shrink-0">
+                              <Download className="w-4 h-4" />
+                            </button>
+                          </div>
+                          <p className="text-xs text-foreground/50">
+                            {file.uploadedBy} • {new Date(file.uploadedAt).toLocaleDateString()}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="text-center py-6 border-2 border-dashed border-border rounded-lg">
+                      <FileText className="w-6 h-6 text-foreground/40 mx-auto mb-2" />
+                      <p className="text-xs text-foreground/60">
+                        No proof uploaded
+                      </p>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             </div>
-
-            {/* Description */}
-            <Card>
-              <CardContent className="pt-6">
-                <h3 className="font-bold text-foreground mb-3">Description</h3>
-                <p className="text-foreground/70">
-                  {mockPaymentDetail.description}
-                </p>
-              </CardContent>
-            </Card>
           </Container>
         </main>
       </div>
