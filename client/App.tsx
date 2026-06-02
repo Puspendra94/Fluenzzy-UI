@@ -14,6 +14,7 @@ import BrandDashboard from "./pages/BrandDashboard";
 import BrandCampaigns from "./pages/BrandCampaigns";
 import BrandDiscoverInfluencers from "./pages/BrandDiscoverInfluencers";
 import BrandManageContracts from "./pages/BrandManageContracts";
+import BrandMessages from "./pages/BrandMessages";
 import AgencyDashboard from "./pages/AgencyDashboard";
 import AgencyCampaigns from "./pages/AgencyCampaigns";
 import AgencyManageBrands from "./pages/AgencyManageBrands";
@@ -64,16 +65,7 @@ const App = () => (
               />
             }
           />
-          <Route
-            path="/brand/messages"
-            element={
-              <PlaceholderPage
-                title="Messages"
-                description="Communicate with agencies and influencers."
-                userRole="brand"
-              />
-            }
-          />
+          <Route path="/brand/messages" element={<BrandMessages />} />
 
           {/* Agency Routes */}
           <Route path="/agency/dashboard" element={<AgencyDashboard />} />
