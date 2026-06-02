@@ -1,5 +1,6 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Logo, Container, Button } from "@/components/micro";
+import { clearUser } from "@/lib/auth";
 
 interface HeaderProps {
   isAuthenticated?: boolean;
@@ -12,6 +13,14 @@ export const Header = ({
   onLogout,
   userRole,
 }: HeaderProps) => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    clearUser();
+    if (onLogout) onLogout();
+    navigate("/");
+  };
+
   return (
     <header className="sticky top-0 z-50 bg-background border-b border-border">
       <Container>
@@ -45,7 +54,7 @@ export const Header = ({
                 <span className="text-sm text-foreground/70 capitalize">
                   {userRole}
                 </span>
-                <Button variant="outline" size="sm" onClick={onLogout}>
+                <Button variant="outline" size="sm" onClick={handleLogout}>
                   Logout
                 </Button>
               </>

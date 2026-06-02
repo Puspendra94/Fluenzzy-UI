@@ -11,8 +11,17 @@ import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import BrandDashboard from "./pages/BrandDashboard";
+import BrandCreateCampaign from "./pages/BrandCreateCampaign";
+import BrandDiscoverInfluencers from "./pages/BrandDiscoverInfluencers";
+import BrandManageContracts from "./pages/BrandManageContracts";
 import AgencyDashboard from "./pages/AgencyDashboard";
+import AgencyManageBrands from "./pages/AgencyManageBrands";
+import AgencyManageInfluencers from "./pages/AgencyManageInfluencers";
+import AgencyAnalytics from "./pages/AgencyAnalytics";
 import InfluencerDashboard from "./pages/InfluencerDashboard";
+import InfluencerCampaignDetails from "./pages/InfluencerCampaignDetails";
+import InfluencerPayments from "./pages/InfluencerPayments";
+import InfluencerMessages from "./pages/InfluencerMessages";
 import { PlaceholderPage } from "./pages/Placeholder";
 
 const queryClient = new QueryClient();
@@ -31,26 +40,8 @@ const App = () => (
 
           {/* Brand Routes */}
           <Route path="/brand/dashboard" element={<BrandDashboard />} />
-          <Route
-            path="/brand/discover"
-            element={
-              <PlaceholderPage
-                title="Discover Influencers"
-                description="Search and filter influencers by niche, subscriber count, and more."
-                userRole="brand"
-              />
-            }
-          />
-          <Route
-            path="/brand/campaigns/new"
-            element={
-              <PlaceholderPage
-                title="Create New Campaign"
-                description="Set up a new campaign brief and video preview."
-                userRole="brand"
-              />
-            }
-          />
+          <Route path="/brand/discover" element={<BrandDiscoverInfluencers />} />
+          <Route path="/brand/campaigns/new" element={<BrandCreateCampaign />} />
           <Route
             path="/brand/campaigns/:id"
             element={
@@ -61,16 +52,7 @@ const App = () => (
               />
             }
           />
-          <Route
-            path="/brand/contracts"
-            element={
-              <PlaceholderPage
-                title="Contract Management"
-                description="Review, sign, and manage your contracts."
-                userRole="brand"
-              />
-            }
-          />
+          <Route path="/brand/contracts" element={<BrandManageContracts />} />
           <Route
             path="/brand/payments"
             element={
@@ -94,26 +76,8 @@ const App = () => (
 
           {/* Agency Routes */}
           <Route path="/agency/dashboard" element={<AgencyDashboard />} />
-          <Route
-            path="/agency/brands"
-            element={
-              <PlaceholderPage
-                title="Manage Brands"
-                description="Add, edit, and manage your client brands."
-                userRole="agency"
-              />
-            }
-          />
-          <Route
-            path="/agency/influencers"
-            element={
-              <PlaceholderPage
-                title="Manage Influencers"
-                description="Build and manage your influencer database."
-                userRole="agency"
-              />
-            }
-          />
+          <Route path="/agency/brands" element={<AgencyManageBrands />} />
+          <Route path="/agency/influencers" element={<AgencyManageInfluencers />} />
           <Route
             path="/agency/campaigns/new"
             element={
@@ -124,16 +88,7 @@ const App = () => (
               />
             }
           />
-          <Route
-            path="/agency/analytics"
-            element={
-              <PlaceholderPage
-                title="Analytics Dashboard"
-                description="Track revenue, performance, and key metrics."
-                userRole="agency"
-              />
-            }
-          />
+          <Route path="/agency/analytics" element={<AgencyAnalytics />} />
           <Route
             path="/agency/shortlisting"
             element={
@@ -147,12 +102,13 @@ const App = () => (
 
           {/* Influencer Routes */}
           <Route path="/influencer/dashboard" element={<InfluencerDashboard />} />
+          <Route path="/influencer/campaigns/:id" element={<InfluencerCampaignDetails />} />
           <Route
-            path="/influencer/campaigns/:id"
+            path="/influencer/campaigns"
             element={
               <PlaceholderPage
-                title="Campaign Details"
-                description="View campaign details and upload deliverables."
+                title="My Campaigns"
+                description="View all your assigned campaigns."
                 userRole="influencer"
               />
             }
@@ -167,26 +123,8 @@ const App = () => (
               />
             }
           />
-          <Route
-            path="/influencer/payments"
-            element={
-              <PlaceholderPage
-                title="Payments & Earnings"
-                description="View your payment history and earnings."
-                userRole="influencer"
-              />
-            }
-          />
-          <Route
-            path="/influencer/messages"
-            element={
-              <PlaceholderPage
-                title="Messages"
-                description="Communicate with brands and agencies."
-                userRole="influencer"
-              />
-            }
-          />
+          <Route path="/influencer/payments" element={<InfluencerPayments />} />
+          <Route path="/influencer/messages" element={<InfluencerMessages />} />
 
           {/* Catch-all route */}
           <Route path="*" element={<NotFound />} />
