@@ -14,6 +14,7 @@ import BrandDashboard from "./pages/BrandDashboard";
 import BrandCampaigns from "./pages/BrandCampaigns";
 import BrandCampaignDetails from "./pages/BrandCampaignDetails";
 import BrandCampaignEdit from "./pages/BrandCampaignEdit";
+import BrandCreateCampaign from "./pages/BrandCreateCampaign";
 import BrandDiscoverInfluencers from "./pages/BrandDiscoverInfluencers";
 import BrandManageContracts from "./pages/BrandManageContracts";
 import BrandMessages from "./pages/BrandMessages";
@@ -48,7 +49,7 @@ const App = () => (
           <Route path="/brand/dashboard" element={<BrandDashboard />} />
           <Route path="/brand/discover" element={<BrandDiscoverInfluencers />} />
           <Route path="/brand/campaigns" element={<BrandCampaigns />} />
-          <Route path="/brand/campaigns/new" element={<BrandCampaigns />} />
+          <Route path="/brand/campaigns/new" element={<BrandCreateCampaign />} />
           <Route path="/brand/campaigns/:campaignId" element={<BrandCampaignDetails />} />
           <Route path="/brand/campaigns/:campaignId/edit" element={<BrandCampaignEdit />} />
           <Route path="/brand/contracts" element={<BrandManageContracts />} />
