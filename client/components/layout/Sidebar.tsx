@@ -36,9 +36,8 @@ export const Sidebar = ({ userRole }: SidebarProps) => {
       },
       {
         label: "Campaigns",
-        href: "/brand/campaigns/new",
+        href: "/brand/campaigns",
         icon: <FileText className="w-4 h-4" />,
-        badge: "new",
       },
       {
         label: "Discover Influencers",
@@ -79,9 +78,8 @@ export const Sidebar = ({ userRole }: SidebarProps) => {
       },
       {
         label: "Campaigns",
-        href: "/agency/campaigns/new",
+        href: "/agency/campaigns",
         icon: <FileText className="w-4 h-4" />,
-        badge: "new",
       },
       {
         label: "Analytics",

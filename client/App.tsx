@@ -11,10 +11,11 @@ import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import BrandDashboard from "./pages/BrandDashboard";
-import BrandCreateCampaign from "./pages/BrandCreateCampaign";
+import BrandCampaigns from "./pages/BrandCampaigns";
 import BrandDiscoverInfluencers from "./pages/BrandDiscoverInfluencers";
 import BrandManageContracts from "./pages/BrandManageContracts";
 import AgencyDashboard from "./pages/AgencyDashboard";
+import AgencyCampaigns from "./pages/AgencyCampaigns";
 import AgencyManageBrands from "./pages/AgencyManageBrands";
 import AgencyManageInfluencers from "./pages/AgencyManageInfluencers";
 import AgencyAnalytics from "./pages/AgencyAnalytics";
@@ -41,7 +42,7 @@ const App = () => (
           {/* Brand Routes */}
           <Route path="/brand/dashboard" element={<BrandDashboard />} />
           <Route path="/brand/discover" element={<BrandDiscoverInfluencers />} />
-          <Route path="/brand/campaigns/new" element={<BrandCreateCampaign />} />
+          <Route path="/brand/campaigns" element={<BrandCampaigns />} />
           <Route
             path="/brand/campaigns/:id"
             element={
@@ -78,16 +79,7 @@ const App = () => (
           <Route path="/agency/dashboard" element={<AgencyDashboard />} />
           <Route path="/agency/brands" element={<AgencyManageBrands />} />
           <Route path="/agency/influencers" element={<AgencyManageInfluencers />} />
-          <Route
-            path="/agency/campaigns/new"
-            element={
-              <PlaceholderPage
-                title="Create Campaign"
-                description="Create a new campaign for a brand."
-                userRole="agency"
-              />
-            }
-          />
+          <Route path="/agency/campaigns" element={<AgencyCampaigns />} />
           <Route path="/agency/analytics" element={<AgencyAnalytics />} />
           <Route
             path="/agency/shortlisting"
