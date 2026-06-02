@@ -78,38 +78,42 @@ export default function BrandDashboard() {
                 <div className="grid md:grid-cols-2 gap-6">
                   {[
                     {
-                      name: "Summer Collection Launch",
-                      status: "Active",
-                      budget: "$5,000",
-                      deadline: "2024-06-30",
+                      id: "1",
+                      name: "Summer Collection 2024",
+                      status: "active",
+                      budget: "5000",
+                      deadline: "2024-08-31",
                     },
                     {
-                      name: "Product Awareness Campaign",
-                      status: "Negotiation",
-                      budget: "$3,500",
-                      deadline: "2024-07-15",
+                      id: "2",
+                      name: "Fall Fashion Week",
+                      status: "active",
+                      budget: "8000",
+                      deadline: "2024-09-15",
                     },
-                  ].map((campaign, idx) => (
-                    <Card key={idx} hoverable>
-                      <CardHeader>
-                        <div className="flex items-start justify-between">
-                          <div>
-                            <CardTitle>{campaign.name}</CardTitle>
-                            <p className="text-sm text-foreground/60 mt-1">
-                              Budget: {campaign.budget}
-                            </p>
+                  ].map((campaign) => (
+                    <Link key={campaign.id} to={`/brand/campaigns/${campaign.id}`}>
+                      <Card hoverable>
+                        <CardHeader>
+                          <div className="flex items-start justify-between">
+                            <div>
+                              <CardTitle>{campaign.name}</CardTitle>
+                              <p className="text-sm text-foreground/60 mt-1">
+                                Budget: ${parseInt(campaign.budget).toLocaleString()}
+                              </p>
+                            </div>
+                            <Badge variant={campaign.status === "active" ? "primary" : "secondary"}>
+                              {campaign.status === "active" ? "Active" : "Negotiation"}
+                            </Badge>
                           </div>
-                          <Badge variant={campaign.status === "Active" ? "success" : "warning"}>
-                            {campaign.status}
-                          </Badge>
-                        </div>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-sm text-foreground/60">
-                          Deadline: {campaign.deadline}
-                        </p>
-                      </CardContent>
-                    </Card>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-sm text-foreground/60">
+                            Deadline: {new Date(campaign.deadline).toLocaleDateString()}
+                          </p>
+                        </CardContent>
+                      </Card>
+                    </Link>
                   ))}
                 </div>
               </div>

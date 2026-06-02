@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Header, Footer, Sidebar } from "@/components/layout";
 import { Container, Card, CardContent, Button, Badge } from "@/components/micro";
-import { ArrowLeft, Edit, Copy, Download, MessageCircle, Trash2 } from "lucide-react";
+import { ArrowLeft, Edit, Copy, Download } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
@@ -164,22 +164,13 @@ export default function BrandCampaignDetails() {
                 </div>
               </div>
 
-              <div className="flex gap-2">
-                <Button
-                  variant="outline"
-                  className="flex items-center gap-2"
-                >
-                  <MessageCircle className="w-4 h-4" />
-                  Message
-                </Button>
-                <Button
-                  onClick={() => navigate(`/brand/campaigns/${campaignId}/edit`)}
-                  className="flex items-center gap-2"
-                >
-                  <Edit className="w-4 h-4" />
-                  Edit Campaign
-                </Button>
-              </div>
+              <Button
+                onClick={() => navigate(`/brand/campaigns/${campaignId}/edit`)}
+                className="flex items-center gap-2"
+              >
+                <Edit className="w-4 h-4" />
+                Edit Campaign
+              </Button>
             </div>
 
             {/* Overview Stats */}
