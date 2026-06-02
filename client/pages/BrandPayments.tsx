@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Header, Footer, Sidebar } from "@/components/layout";
 import { Container, Card, CardContent, Button } from "@/components/micro";
+import { Link } from "react-router-dom";
 import {
   CreditCard,
   Download,
@@ -424,9 +425,12 @@ export default function BrandPayments() {
                             </div>
                           </td>
                           <td className="py-4 px-4 text-center">
-                            <button className="text-primary hover:text-primary/80 transition-colors text-sm font-medium">
+                            <Link
+                              to={`/brand/payments/${payment.id}`}
+                              className="text-primary hover:text-primary/80 transition-colors text-sm font-medium"
+                            >
                               View Details
-                            </button>
+                            </Link>
                           </td>
                         </tr>
                       ))}

@@ -16,6 +16,7 @@ import BrandDiscoverInfluencers from "./pages/BrandDiscoverInfluencers";
 import BrandManageContracts from "./pages/BrandManageContracts";
 import BrandMessages from "./pages/BrandMessages";
 import BrandPayments from "./pages/BrandPayments";
+import BrandPaymentDetails from "./pages/BrandPaymentDetails";
 import AgencyDashboard from "./pages/AgencyDashboard";
 import AgencyCampaigns from "./pages/AgencyCampaigns";
 import AgencyManageBrands from "./pages/AgencyManageBrands";
@@ -57,6 +58,7 @@ const App = () => (
           />
           <Route path="/brand/contracts" element={<BrandManageContracts />} />
           <Route path="/brand/payments" element={<BrandPayments />} />
+          <Route path="/brand/payments/:paymentId" element={<BrandPaymentDetails />} />
           <Route path="/brand/messages" element={<BrandMessages />} />
 
           {/* Agency Routes */}
