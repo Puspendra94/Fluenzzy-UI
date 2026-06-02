@@ -76,7 +76,7 @@ export const Footer = () => {
           </div>
         </div>
         <div className="border-t border-border py-6 flex items-center justify-between text-sm text-foreground/60">
-          <p>&copy; 2024 Fluenzzy. All rights reserved.</p>
+          <p>&copy; 2026 Fluenzzy. All rights reserved.</p>
           <div className="flex gap-4">
             <a href="#" className="hover:text-foreground transition-colors">
               Twitter
