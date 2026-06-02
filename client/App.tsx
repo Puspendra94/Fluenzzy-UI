@@ -12,6 +12,8 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import BrandDashboard from "./pages/BrandDashboard";
 import BrandCampaigns from "./pages/BrandCampaigns";
+import BrandCampaignDetails from "./pages/BrandCampaignDetails";
+import BrandCampaignEdit from "./pages/BrandCampaignEdit";
 import BrandDiscoverInfluencers from "./pages/BrandDiscoverInfluencers";
 import BrandManageContracts from "./pages/BrandManageContracts";
 import BrandMessages from "./pages/BrandMessages";
@@ -46,16 +48,8 @@ const App = () => (
           <Route path="/brand/dashboard" element={<BrandDashboard />} />
           <Route path="/brand/discover" element={<BrandDiscoverInfluencers />} />
           <Route path="/brand/campaigns" element={<BrandCampaigns />} />
-          <Route
-            path="/brand/campaigns/:id"
-            element={
-              <PlaceholderPage
-                title="Campaign Details"
-                description="View and manage your campaign details, deliverables, and payments."
-                userRole="brand"
-              />
-            }
-          />
+          <Route path="/brand/campaigns/:campaignId" element={<BrandCampaignDetails />} />
+          <Route path="/brand/campaigns/:campaignId/edit" element={<BrandCampaignEdit />} />
           <Route path="/brand/contracts" element={<BrandManageContracts />} />
           <Route path="/brand/payments" element={<BrandPayments />} />
           <Route path="/brand/payments/:paymentId" element={<BrandPaymentDetails />} />

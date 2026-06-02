@@ -174,12 +174,18 @@ export default function BrandCampaigns() {
                             </div>
 
                             <div className="flex gap-2 ml-4">
-                              <button className="p-2 hover:bg-muted rounded-lg transition-colors text-foreground/60 hover:text-foreground">
+                              <Link
+                                to={`/brand/campaigns/${campaign.id}`}
+                                className="p-2 hover:bg-muted rounded-lg transition-colors text-foreground/60 hover:text-foreground"
+                              >
                                 <Eye className="w-4 h-4" />
-                              </button>
-                              <button className="p-2 hover:bg-muted rounded-lg transition-colors text-foreground/60 hover:text-foreground">
+                              </Link>
+                              <Link
+                                to={`/brand/campaigns/${campaign.id}/edit`}
+                                className="p-2 hover:bg-muted rounded-lg transition-colors text-foreground/60 hover:text-foreground"
+                              >
                                 <Edit className="w-4 h-4" />
-                              </button>
+                              </Link>
                             </div>
                           </div>
                         </CardContent>
