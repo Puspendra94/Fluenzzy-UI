@@ -56,7 +56,7 @@ export default function BrandCampaignEdit() {
 
     console.log("Campaign updated:", formData);
     setIsSaving(false);
-    navigate(`/brand/campaigns/${campaignId}`);
+    navigate(-1);
   };
 
   return (
@@ -72,7 +72,7 @@ export default function BrandCampaignEdit() {
             <div className="mb-8 flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <button
-                  onClick={() => navigate(`/brand/campaigns/${campaignId}`)}
+                  onClick={() => navigate(-1)}
                   className="p-2 hover:bg-muted rounded-lg transition-colors"
                 >
                   <ArrowLeft className="w-5 h-5 text-foreground" />
@@ -220,7 +220,7 @@ export default function BrandCampaignEdit() {
                     variant="outline"
                     size="lg"
                     fullWidth
-                    onClick={() => navigate(`/brand/campaigns/${campaignId}`)}
+                    onClick={() => navigate(-1)}
                   >
                     <X className="w-4 h-4 mr-2" />
                     Cancel

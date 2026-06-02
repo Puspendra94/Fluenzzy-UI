@@ -146,7 +146,7 @@ export default function BrandCampaignDetails() {
             <div className="mb-8 flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <button
-                  onClick={() => navigate("/brand/campaigns")}
+                  onClick={() => navigate(-1)}
                   className="p-2 hover:bg-muted rounded-lg transition-colors"
                 >
                   <ArrowLeft className="w-5 h-5 text-foreground" />
